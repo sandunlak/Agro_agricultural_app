@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'loginpage.dart'; // Import the LoginPage file
+import 'secondpage.dart'; // Import the LoginPage file
+
+
 
 void main() {
   runApp(MyApp());
@@ -59,7 +61,7 @@ class HomePage extends StatelessWidget {
                       // Navigate to LoginPage
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        MaterialPageRoute(builder: (context) => SecondPage()),
                       );
                     },
                     style: ElevatedButton.styleFrom(
