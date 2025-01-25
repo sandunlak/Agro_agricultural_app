@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_apps/loginpage.dart';
+import 'service1.dart'; // Import for Service 1 page
+import 'service2.dart'; // Import for Service 2 page
+//import 'service3.dart'; // Import for Service 3 page
+//import 'service4.dart'; // Import for Service 4 page
+//import 'service5.dart'; // Import for Service 5 page
+//import 'service6.dart'; // Import for Service 6 page
 
 class SecondPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // List of services with their respective routes
     final List<Map<String, dynamic>> services = [
-      {'image': 'images/vegi.webp', 'route': DummyPage('Service 1')},
-      {'image': 'images/service2.png', 'route': DummyPage('Service 2')},
-      {'image': 'images/service3.png', 'route': DummyPage('Service 3')},
-      {'image': 'images/service4.png', 'route': DummyPage('Service 4')},
-      {'image': 'images/service5.png', 'route': DummyPage('Service 5')},
-      {'image': 'images/service6.png', 'route': DummyPage('Service 6')},
+      {'image': 'images/vegi.webp', 'route': Service1()},
+      {'image': 'images/climate.jpg', 'route': Service2()},
+      //{'image': 'images/service3.png', 'route': Service3Page()},
+      //{'image': 'images/service4.png', 'route': Service4Page()},
+      //{'image': 'images/service5.png', 'route': Service5Page()},
+      //{'image': 'images/service6.png', 'route': Service6Page()},
     ];
 
     return Scaffold(
@@ -19,7 +26,7 @@ class SecondPage extends StatelessWidget {
           // Background Image
           Positioned.fill(
             child: Image(
-              image: AssetImage('images/paddy_blur.jpg'), // Replace with your background image path
+              image: AssetImage('images/paddy_blur.jpg'),
               fit: BoxFit.cover,
             ),
           ),
@@ -52,18 +59,18 @@ class SecondPage extends StatelessWidget {
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, // Adjust for columns
+                        crossAxisCount: 2,
                         crossAxisSpacing: 20,
                         mainAxisSpacing: 20,
                       ),
-                      itemCount: services.length, // Number of boxes
+                      itemCount: services.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => services[index]['route'], // Navigate to the respective page
+                                builder: (context) => services[index]['route'],
                               ),
                             );
                           },
@@ -76,7 +83,7 @@ class SecondPage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                               child: Image.asset(
                                 services[index]['image'],
-                                fit: BoxFit.cover, // Fills the box completely
+                                fit: BoxFit.cover,
                               ),
                             ),
                           ),
@@ -87,7 +94,7 @@ class SecondPage extends StatelessWidget {
                     // Back Button
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.pop(context); // Navigate back to the previous page
+                        Navigator.pop(context);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
@@ -107,28 +114,6 @@ class SecondPage extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-// Dummy page to represent separate service pages
-class DummyPage extends StatelessWidget {
-  final String title;
-
-  DummyPage(this.title);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: Center(
-        child: Text(
-          '$title Page',
-          style: TextStyle(fontSize: 24),
-        ),
       ),
     );
   }
