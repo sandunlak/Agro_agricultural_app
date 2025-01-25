@@ -35,7 +35,7 @@ class _Service1State extends State<Service2> {
 
   Future<void> fetchWeatherForDefaultCities() async {
     final List<String> defaultCities = [
-      'Colombo',
+      'colombo',
       'Kandy',
       'Jaffna',
       'Galle',
