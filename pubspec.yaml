@@ -61,6 +61,7 @@ flutter:
   assets:
     - images/paddy.jpeg
     - images/paddy_blur.jpg
+    - images/vegi.webp
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

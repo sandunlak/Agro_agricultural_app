@@ -1,23 +1,16 @@
 import 'package:flutter/material.dart';
-//import 'service1_page.dart';
-//import 'service2_page.dart';
-//import 'service3_page.dart';
-//import 'service4_page.dart';
-//import 'service5_page.dart';
-//import 'service6_page.dart';
 
 class SecondPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // List of services with their respective routes
     final List<Map<String, dynamic>> services = [
-      {'image': 'images/service1.png'},
-      {'image': 'images/service2.png'},
-      {'image': 'images/service3.png'},
-      {'image': 'images/service4.png'},
-      {'image': 'images/service5.png'},
-      {'image': 'images/service6.png'},
-      //{'image': 'images/service6.png', 'route': Service6Page()},
+      {'image': 'images/vegi.webp', 'route': DummyPage('Service 1')},
+      {'image': 'images/service2.png', 'route': DummyPage('Service 2')},
+      {'image': 'images/service3.png', 'route': DummyPage('Service 3')},
+      {'image': 'images/service4.png', 'route': DummyPage('Service 4')},
+      {'image': 'images/service5.png', 'route': DummyPage('Service 5')},
+      {'image': 'images/service6.png', 'route': DummyPage('Service 6')},
     ];
 
     return Scaffold(
@@ -59,11 +52,11 @@ class SecondPage extends StatelessWidget {
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3, // 3 columns
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
+                        crossAxisCount: 2, // Adjust for columns
+                        crossAxisSpacing: 20,
+                        mainAxisSpacing: 20,
                       ),
-                      itemCount: services.length, // 6 boxes
+                      itemCount: services.length, // Number of boxes
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
@@ -79,11 +72,11 @@ class SecondPage extends StatelessWidget {
                               color: Colors.green.withOpacity(0.8),
                               borderRadius: BorderRadius.circular(10),
                             ),
-                            child: Center(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
                               child: Image.asset(
                                 services[index]['image'],
-                                height: 50,
-                                width: 50,
+                                fit: BoxFit.cover, // Fills the box completely
                               ),
                             ),
                           ),
@@ -114,6 +107,28 @@ class SecondPage extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+// Dummy page to represent separate service pages
+class DummyPage extends StatelessWidget {
+  final String title;
+
+  DummyPage(this.title);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: Center(
+        child: Text(
+          '$title Page',
+          style: TextStyle(fontSize: 24),
+        ),
       ),
     );
   }
