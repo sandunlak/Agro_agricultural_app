@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_apps/loginpage.dart';
 import 'service1.dart'; // Import for Service 1 page
 import 'service2.dart'; // Import for Service 2 page
-//import 'service3.dart'; // Import for Service 3 page
+import 'service3.dart'; // Import for Service 3 page
 //import 'service4.dart'; // Import for Service 4 page
 //import 'service5.dart'; // Import for Service 5 page
 //import 'service6.dart'; // Import for Service 6 page
@@ -14,7 +14,7 @@ class SecondPage extends StatelessWidget {
     final List<Map<String, dynamic>> services = [
       {'image': 'images/vegi.webp', 'route': Service1()},
       {'image': 'images/climate.jpg', 'route': Service2()},
-      //{'image': 'images/service3.png', 'route': Service3Page()},
+      {'image': 'images/climate.jpg', 'route': Service3()},
       //{'image': 'images/service4.png', 'route': Service4Page()},
       //{'image': 'images/service5.png', 'route': Service5Page()},
       //{'image': 'images/service6.png', 'route': Service6Page()},
@@ -115,6 +115,23 @@ class SecondPage extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Grid View Example',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: SecondPage(),
     );
   }
 }

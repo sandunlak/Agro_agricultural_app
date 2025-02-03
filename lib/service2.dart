@@ -18,14 +18,14 @@ class WeatherInfo {
 
 class Service2 extends StatefulWidget {
   @override
-  _Service1State createState() => _Service1State();
+  _Service2State createState() => _Service2State();
 }
 
-class _Service1State extends State<Service2> {
+class _Service2State extends State<Service2> {
   List<WeatherInfo> weatherData = [];
   List<WeatherInfo> filteredWeather = [];
   final TextEditingController searchController = TextEditingController();
-  final String apiKey = 'YOUR_API_KEY'; // Replace with your API key
+  final String apiKey = 'YOUR_API_KEY'; // Replace with your OpenWeatherMap API key
 
   @override
   void initState() {
@@ -35,7 +35,7 @@ class _Service1State extends State<Service2> {
 
   Future<void> fetchWeatherForDefaultCities() async {
     final List<String> defaultCities = [
-      'colombo',
+      'Colombo',
       'Kandy',
       'Jaffna',
       'Galle',
@@ -75,20 +75,48 @@ class _Service1State extends State<Service2> {
           weatherDescription: data['weather'][0]['description'],
           rainfall: data['rain']?['1h']?.toString() ?? 'No recent rain',
         );
+      } else {
+        showErrorMessage('City not found. Please try again.');
       }
     } catch (e) {
       print('Error fetching weather data: $e');
+      showErrorMessage('Failed to fetch weather data. Please check your connection.');
     }
     return null;
   }
 
-  void filterWeather(String query) {
-    setState(() {
-      filteredWeather = weatherData
-          .where((info) =>
-          info.location.toLowerCase().contains(query.toLowerCase()))
-          .toList();
+  void showErrorMessage(String message) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Error'),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('Close'),
+            ),
+          ],
+        ),
+      );
     });
+  }
+
+  void filterWeather(String query) async {
+    if (query.isEmpty) {
+      setState(() {
+        filteredWeather = weatherData;
+      });
+      return;
+    }
+
+    WeatherInfo? searchedCityWeather = await fetchWeather(query);
+    if (searchedCityWeather != null) {
+      setState(() {
+        filteredWeather = [searchedCityWeather];
+      });
+    }
   }
 
   void showDailyUpdates() {
